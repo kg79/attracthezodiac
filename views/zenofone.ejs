@@ -1,0 +1,1050 @@
+<!doctype html>
+<html>
+    <head>
+ <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+     <style>
+         body, html {
+    margin:0;
+    font-family:sans-serif;
+} main {
+    height:100vh;
+    display:grid;
+    grid:"space0 space1 space1 space1 space1"
+         "space0 space1 space1 space1 space1"
+         "space0 space2 space2 space2 space2"
+         "space0 space2 space2 space2 space2"
+         "space0 space2 space2 space2 space2"
+         "space0 space2 space2 space2 space2"
+         "space0 space2 space2 space2 space2"
+         "space0 space2 space2 space2 space2"
+         "space0 space2 space2 space2 space2"
+         "space0 space2 space2 space2 space2"
+         "space0 space2 space2 space2 space2";
+         background:#0fff9f;
+} #rithmForm {
+    background:#0fff9f;
+    width:fit-content;
+} input {
+    width:5em;
+} #algorithm {
+    display:grid;
+    grid-template-columns:auto auto auto;
+    overflow:scroll;
+    background:#0fff9f;
+    height:83vh;
+} .fractionRatio, .decimalRatio, .frequencyRatio {
+    border:solid 1px #2c00f2;
+    text-align:center;
+}
+
+#box0 {
+    grid-area:space0;
+    background:#0fff9f;
+    position:absolute;
+} #box1 {
+    grid-area:space1;
+    background:#2c00f2;
+    position:relative;
+    width:93%;
+    left:7%;
+} #box2 {
+    grid-area:space2;
+    background:#ff005d;
+    display:flex;
+    justify-content:space-evenly;
+    align-items:center;
+
+} #localDatabaseForm {
+    width:fit-content;
+    margin:auto;
+    padding:1%;
+    border:solid 1px black;
+} #localDatabaseArea {
+    border:solid 2px black;
+    background:white;
+    width:fit-content;
+    width:12em;
+    position:relative;
+} #localRetrieve {
+    background:white;
+    height:9em;
+    overflow:scroll;
+} #localDataRetrieved {
+    background:white;
+    border:solid black 1px;
+} #retrievedScale {
+    overflow:scroll;
+    cursor:pointer;
+}
+
+.scaleNameRetrieved {
+    border:solid 1px black;
+    cursor:pointer;
+} #metaScaleName {
+    text-align:center;
+    border:solid 1px black;
+    background:black;
+    color:white;
+}
+h1 {
+    text-align:center;
+    font-family: 'Dancing Script', cursive;
+    color:white;
+}
+#tileBox {
+    display:grid;
+    grid-template-columns:auto auto auto auto auto auto auto auto auto auto;
+} .tileBags {
+    background:#2c00f2;
+    border:#2c00f2 1px solid;
+}
+.keymaps, .decimals, .fractions, .frequencies {
+    font-family:sans-serif;
+    background:#ff005d;
+    border-bottom:#2c00f2 solid 1px;
+    text-align:center;
+    color:white;
+} .fractionRatio {
+    cursor:pointer;
+}
+
+#basicControls, #theBiquadFilter, #compressor {
+    background:white;
+    border:solid 2px black;
+}
+     </style> 
+        <script src='indexedDB.js'></script>
+    </head>
+    <body>
+        <main>
+            <div id='box0'>
+                <div id='rithmForm'>
+                    concert pitch:<input type='number' id='concertPitch' value='216'><br/>
+                    
+                    how much?<input type='number' id='howMuch' value='20'><br/>
+
+                    volume:<input type='range' id='sampleVolume' min='0' max='10' value='1' step='1'><br/>
+
+                    <button id='rithmButton'>ascending</button>
+                    <button id='rithmButtonDescending'>descending</button>
+                    <button onclick='sorter()'>sort</button>
+                    <!-- <button onclick='trim()'>trim</button> -->
+                    <div>Selected Ratio:<span id='selectedRatio'></span></div>
+            
+                </div>
+                
+              <section id='algorithm'></section>
+
+            </div>
+            <div id='box1'>
+                <h1>
+                    zenofone
+                </h1>
+              
+                <section id='tileBox'>
+                    <% for (let i = 0; i < 40; i++) { %>
+                        <article class='tileBags' data-index='<%=i%>'>
+                            <div class='keymaps'>&nbsp;</div>
+        <div class='fractions' ondrop='drop(event)' ondragover='allowDrop(event)' draggable='true' 
+        ondragstart='drag(event)' id='tile<%=i%>'>&nbsp;</div>
+                            <div class='decimals'>&nbsp;</div>
+                            <div class='frequencies'>&nbsp;</div>
+                        </article>
+                    <% } %>
+                </section>
+            </div>
+            <div id='box2'>
+
+                <section id='localDatabaseArea'>
+
+                    <form id='localDatabaseForm'>
+                        <div>
+                            Name of Scale: <input id='nameOfScale'>
+                        </div>
+                        <button id='submitDB'>submit</button>
+                        
+                    </form>
+                    <button id='retriever'>retrieve</button>
+                    <button id='clear'>clear</button>
+                    <br/>
+                    <button id='modifier'>modify</button>:<input id='scaleModifier'>
+
+                    <article id='localRetrieve'>
+                        
+                    </article>
+                    <div id='retrievedScale'>
+
+                    </div>
+                </section>
+
+                <section id='basicControls'>
+                        volume: <input type='range' id='regularVolume' min='0' max='10' value='1' step='1'><br/>
+                        <br/>
+                            wave type:
+                            <select id='wave'>
+                                    <option value="sine">sine</option>
+                                    <option value="square">square</option>
+                                    <option value="triangle">triangle</option>
+                                    <option value="sawtooth">sawtooth</option>
+                            </select>
+
+                </section>
+
+                <section id='theBiquadFilter'>
+                    <label>Biquad Filter: </label>
+                    <select id='biquadFilter'>
+                           <option value="lowpass">lowpass</option>
+                           <option value="highpass">highpass</option>
+                           <option value="bandpass">bandpass</option>
+                           <option value="lowshelf">lowshelf</option>
+                           <option value="highshelf">highshelf</option>
+                           <option value="peaking">peaking</option>
+                           <option value="notch">notch</option>
+                           <option value="allpass">allpass</option>
+                   </select>
+   
+                    <p class='biquadLabel' id='biquadFrequencyContainer'>  
+                        freq.  <input type='number' id='biquadFrequency' value='528'>
+                    </p>
+
+                    <p class='biquadLabel' id='biquadQualityContainer'>  
+                        quality  <input type='number' id='biquadQuality' value='10'>
+                    </p>
+
+                    <p class='biquadLabel' id='biquadGainContainer' hidden>
+                        gain <input type='range' id='biquadGain' value='10' min='-40' max='40' step='1'>
+                    </p>
+             
+                </section>
+
+                <section id='compressor'>
+                    <label>Compressor</label><br/>
+                    <span class='compressorBoxes'>attack:<input class='compressors' id='compressorAttack' type='range' min='0' max='1' step='.1' value='.1'></span><br/>
+                    <span class='compressorBoxes'>knee:<input class='compressors' id='compressorKnee' type='range' min='0' max='40' step='1' value='30'></span><br/>
+                    <span class='compressorBoxes'>ratio:<input class='compressors' id='compressorRatio' type='range' min='1' max='20' step='1' value='12'></span><br/>
+                    <span class='compressorBoxes'>release:<input class='compressors' id='compressorRelease' type='range' min='0' max='1' step='.05' value='.25'></span><br/>
+                    <span class='compressorBoxes'>threshold:<input class='compressors' id='compressorThreshold' type='range' min='-100' max='0' step='1' value='-24'></span>
+                </section>
+
+            </div>
+        </main>
+    </body>
+    <script>
+        const keyCodes = [
+            {'symb':'1', 'numb':49},
+            {'symb':'2', 'numb':50},
+            {'symb':'3', 'numb':51},
+            {'symb':'4', 'numb':52},
+            {'symb':'5', 'numb':53},
+            {'symb':'6', 'numb':54},
+            {'symb':'7', 'numb':55},
+            {'symb':'8', 'numb':56},
+            {'symb':'9', 'numb':57},
+            {'symb':'0', 'numb':48},
+            {'symb':'Q', 'numb':81},
+            {'symb':'W', 'numb':87},
+            {'symb':'E', 'numb':69},
+            {'symb':'R', 'numb':82},
+            {'symb':'T', 'numb':84},
+            {'symb':'Y', 'numb':89},
+            {'symb':'U', 'numb':85},
+            {'symb':'I', 'numb':73},
+            {'symb':'O', 'numb':79},
+            {'symb':'P', 'numb':80},
+            {'symb':'A', 'numb':65},
+            {'symb':'S', 'numb':83},
+            {'symb':'D', 'numb':68},
+            {'symb':'F', 'numb':70},
+            {'symb':'G', 'numb':71},
+            {'symb':'H', 'numb':72},
+            {'symb':'J', 'numb':74},
+            {'symb':'K', 'numb':75},
+            {'symb':'L', 'numb':76},
+            {'symb':';', 'numb':186},
+            {'symb':'Z', 'numb':90},
+            {'symb':'X', 'numb':88},
+            {'symb':'C', 'numb':67},
+            {'symb':'V', 'numb':86},
+            {'symb':'B', 'numb':66},
+            {'symb':'N', 'numb':78},
+            {'symb':'M', 'numb':77},
+            {'symb':',', 'numb':188},
+            {'symb':'.', 'numb':190},
+            {'symb':'/', 'numb':191},
+        ];
+        
+        const submitDB = document.getElementById('submitDB');
+        const nameOfScale = document.getElementById('nameOfScale');
+        const retriever = document.getElementById('retriever');
+        const localRetrieve = document.getElementById('localRetrieve');
+        const localDatabaseArea = document.getElementById('localDatabaseArea');
+        const retrievedScale = document.getElementById('retrievedScale');
+        const modifier = document.getElementById('modifier');
+        const scaleModifier = document.getElementById('scaleModifier');
+        const clear = document.getElementById('clear');
+        const sampleVolume = document.getElementById('sampleVolume');
+        const regularVolume = document.getElementById('regularVolume');
+        let request = indexedDB.open('westernCanon'),
+        db,
+        store;
+request.onupgradeneeded = function() {
+    db = request.result;
+    store = db.createObjectStore("music", {keyPath: "name"});
+    let nameIndex = store.createIndex("by_name", "name", {unique: true});
+    store.put({name: 'major', scale:['1/1', '9/8', '5/4', '4/3', '3/2', '5/3', '15/8', '2/1']});
+    console.log('upgrades')
+};
+let ray = [];
+submitDB.addEventListener('click', () => {
+    for (let i = 0; i < fractions.length; i++) {
+         if (eval(fractions[i].textContent) > 0 || eval(fractions[i].textContent) < 0) {
+             ray.push(fractions[i].textContent);
+         }
+     }
+        db = request.result;
+        let tx = db.transaction('music', 'readwrite');
+        let store = tx.objectStore('music');
+        store.put({name:`${nameOfScale.value}`, scale:[...ray]})
+});
+retriever.addEventListener('click', () => {
+    ray = [];
+    db = request.result;
+    let transaction = db.transaction("music", 'readonly');
+    let objectStore = transaction.objectStore("music");
+    let node, text;
+        node = document.createElement('div');
+        node.setAttribute('id', 'metaScaleName')
+        text = document.createTextNode('name of scale');
+        node.appendChild(text);
+        localRetrieve.appendChild(node);
+    objectStore.openCursor().onsuccess = (e) => {
+        let cursor = e.target.result;
+            if (cursor) {
+                node = document.createElement('div');
+                node.setAttribute('class', 'scaleNameRetrieved')
+                text = document.createTextNode(`${cursor.key}`);
+                node.appendChild(text);
+                localRetrieve.appendChild(node);
+                cursor.continue();
+            }
+            else {
+                console.log("No more entries!");
+            }
+    }
+});
+localRetrieve.addEventListener('click', e => {
+    let transaction = db.transaction(['music'], 'readonly');
+    let objectStore = transaction.objectStore('music');
+    let objectStoreRequest = objectStore.get(`${e.target.textContent}`);
+    objectStoreRequest.onsuccess = e => {
+        
+        let record = objectStoreRequest.result;
+        retrievedScale.innerText = record.scale;
+    }
+});
+retrievedScale.addEventListener('click', e => {
+let ray = e.target.textContent.split(',');
+for (let i = 0; i < ray.length; i++) {
+    fractions[i].innerText = ray[i];
+    decimals[i].innerText = eval(fractions[i].textContent).
+        toPrecision(4).replace(/0+$/, '').replace(/\.$/, '');
+    frequencies[i].innerText = eval(concertPitch.value* eval(fractions[i].textContent)).
+        toPrecision(5).replace(/0+$/, '').replace(/\.$/, '');
+}
+});
+modifier.addEventListener('click', () => {
+ray = [];
+for (let i = 0; i < fractions.length; i++) {
+         if (eval(fractions[i].textContent) > 0 || eval(fractions[i].textContent) < 0) {
+             ray.push(fractions[i].textContent)
+         }
+}
+db = request.result;
+tx = db.transaction('music', 'readwrite');
+store = tx.objectStore('music');
+store.put({name:`${scaleModifier.value}`, scale:[...ray]});
+});
+clear.addEventListener('click', () => {
+  for (let i = 0; i < 40; i++) {
+      fractions[i].innerHTML = '&nbsp;';
+      decimals[i].innerHTML = '&nbsp;';
+      frequencies[i].innerHTML = '&nbsp;';
+  }
+})
+        const biquadFilter = document.getElementById('biquadFilter');
+        const biquadFrequency = document.getElementById('biquadFrequency');
+        const biquadGain = document.getElementById('biquadGain');
+        const biquadQuality = document.getElementById('biquadQuality');
+        const wave = document.getElementById('wave');
+        const concertPitch = document.getElementById('concertPitch');
+        const algorithm = document.getElementById('algorithm');
+        const keymaps = document.getElementsByClassName('keymaps');
+        const howMuch = document.getElementById('howMuch');
+        const rithmButton = document.getElementById('rithmButton');
+        const selectedRatio = document.getElementById('selectedRatio');
+        const tileBox = document.getElementById('tileBox');
+        const tileBags = document.getElementsByClassName('tileBags');
+        
+        const fractions = document.getElementsByClassName('fractions');
+        const decimals = document.getElementsByClassName('decimals');
+        const frequencies = document.getElementsByClassName('frequencies');
+        const fractionRatio = document.getElementsByClassName('fractionRatio');
+        const decimalRatio = document.getElementsByClassName('decimalRatio');
+        const frequencyRatio = document.getElementsByClassName('frequencyRatio');
+        const compressorAttack = document.getElementById('compressorAttack');
+        const compressorKnee = document.getElementById('compressorKnee');
+        const compressorRatio = document.getElementById('compressorRatio');
+        const compressorRelease = document.getElementById('compressorRelease');
+        const compressorThreshold = document.getElementById('compressorThreshold');
+        document.addEventListener('DOMContentLoaded', () => {
+            for (let i = 0; i < 40; i++) {
+                keymaps[i].innerText = keyCodes[i].symb;
+            }
+        });
+        function sorter() {
+        let sideA, sideB;
+    if (ascending.length > 0) {
+           for (let i = 0; i < ascending.length; i++) {
+               for (let j = 1; j < ascending.length; j++) {
+                   if (ascending[j].decimals < ascending[j-1].decimals) {
+                       sideA = ascending[j].decimals;
+                       sideB = ascending[j].fractions;
+                       ascending[j].decimals = ascending[j-1].decimals;
+                       ascending[j].fractions = ascending[j-1].fractions;
+                       ascending[j-1].decimals = sideA;
+                       ascending[j-1].fractions = sideB;
+                   }
+               }
+           }
+           while (fractionRatio.length > 0 && decimalRatio.length > 0) {
+                    for (let i = 0; i < fractionRatio.length; i++) {
+                        fractionRatio[i].parentNode.removeChild(fractionRatio[0])
+                        decimalRatio[i].parentNode.removeChild(decimalRatio[0])
+                        frequencyRatio[i].parentNode.removeChild(frequencyRatio[0])
+                    }
+            }
+            for (let i in ascending) {
+		        let fractionNode = document.createElement('div');
+                let fractionTextNode = document.createTextNode(`${ascending[i].fractions}`);
+                fractionNode.appendChild(fractionTextNode);
+                fractionNode.setAttribute('class', 'fractionRatio');
+                fractionNode.setAttribute('data-index', i)
+                algorithm.appendChild(fractionNode);
+                let decimalNode = document.createElement('div');
+let decimalTextNode = document.createTextNode(`${eval(ascending[i].decimals).
+toPrecision(5).replace(/0+$/, '').replace(/\.$/, '')}`);
+                decimalNode.appendChild(decimalTextNode);
+                decimalNode.setAttribute('class', 'decimalRatio');
+                algorithm.appendChild(decimalNode);
+                let frequencyNode = document.createElement('div');
+let frequencyTextNode = document.createTextNode(`${eval(concertPitch.value* ascending[i].decimals).
+toPrecision(6).replace(/0+$/, '').replace(/\.$/, '')}`);
+                frequencyNode.appendChild(frequencyTextNode);
+                frequencyNode.setAttribute('class', 'frequencyRatio');
+                algorithm.appendChild(frequencyNode);
+            }
+    } 
+    if (descending.length > 0) {
+        for (let i = 0; i < descending.length; i++) {
+               for (let j = 1; j < descending.length; j++) {
+                   if (descending[j].decimals > descending[j-1].decimals) {
+                       sideA = descending[j].decimals;
+                       sideB = descending[j].fractions;
+                       descending[j].decimals = descending[j-1].decimals;
+                       descending[j].fractions = descending[j-1].fractions;
+                       descending[j-1].decimals = sideA;
+                       descending[j-1].fractions = sideB;
+                   }
+               }
+           }
+           while (fractionRatio.length > 0 && decimalRatio.length > 0) {
+                    for (let i = 0; i < fractionRatio.length; i++) {
+                        fractionRatio[i].parentNode.removeChild(fractionRatio[0])
+                        decimalRatio[i].parentNode.removeChild(decimalRatio[0])
+                        frequencyRatio[i].parentNode.removeChild(frequencyRatio[0])
+                    }
+            }
+            for (let i in descending) {
+		        let fractionNode = document.createElement('div');
+                let fractionTextNode = document.createTextNode(`${descending[i].fractions}`);
+                fractionNode.appendChild(fractionTextNode);
+                fractionNode.setAttribute('class', 'fractionRatio');
+                fractionNode.setAttribute('data-index', i)
+                algorithm.appendChild(fractionNode);
+                let decimalNode = document.createElement('div');
+let decimalTextNode = document.createTextNode(`${eval(descending[i].decimals).
+toPrecision(5).replace(/0+$/, '').replace(/\.$/, '')}`);
+                decimalNode.appendChild(decimalTextNode);
+                decimalNode.setAttribute('class', 'decimalRatio');
+                algorithm.appendChild(decimalNode);
+                let frequencyNode = document.createElement('div');
+let frequencyTextNode = document.createTextNode(`${eval(concertPitch.value* descending[i].decimals).
+toPrecision(6).replace(/0+$/, '').replace(/\.$/, '')}`);
+                frequencyNode.appendChild(frequencyTextNode);
+                frequencyNode.setAttribute('class', 'frequencyRatio');
+                algorithm.appendChild(frequencyNode);
+            }
+    }
+        }
+        function trim() {
+        //     for (let i = 1; i < ascending.length; i++) {
+        //        if (ascending[i].decimals === ascending[i-1].decimals) {
+        //            while (ascending[i].decimals === ascending[i-1].decimals) {
+        //                ascending.splice(i, 1);
+        //            }
+        //        }
+        //    }
+        // for (let i = 1; i < ascending.length; i++) {
+        //     if (ascending[i].decimals === ascending[i-1].decimals) {
+        //     }
+        // }
+            // fractionRatio[i].parentNode.removeChild(fractionRatio[0])
+            // decimalRatio[i].parentNode.removeChild(decimalRatio[0])
+            // frequencyRatio[i].parentNode.removeChild(frequencyRatio[0])
+        }
+        let numerator = 2, denominator = 1, ascending = [], descending = [];
+        rithmButton.addEventListener('click', () => {
+    //removerer
+            ascending = [];
+            descending = [];
+            numerator = 2;
+            denominator = 1;
+            while (fractionRatio.length > 0 && decimalRatio.length > 0) {
+                    for (let i = 0; i < fractionRatio.length; i++) {
+                        fractionRatio[i].parentNode.removeChild(fractionRatio[0])
+                        decimalRatio[i].parentNode.removeChild(decimalRatio[0])
+                        frequencyRatio[i].parentNode.removeChild(frequencyRatio[0])
+                    }
+            }
+    // end of remover
+        ascending.push({'fractions':`1/1`, 'decimals':`1`});
+            for (let i = 0; i < howMuch.value; i++) {
+		        if (denominator < numerator) {
+    ascending.push({'fractions':`${numerator}/${denominator}`, 'decimals':`${numerator/denominator}`});
+                    denominator++;
+                }
+                if (denominator === numerator) {
+                    denominator = 1;
+                    numerator++;
+                }
+            }
+            for (let i in ascending) {
+		        let fractionNode = document.createElement('div');
+                let fractionTextNode = document.createTextNode(`${ascending[i].fractions}`);
+                fractionNode.appendChild(fractionTextNode);
+                fractionNode.setAttribute('class', 'fractionRatio');
+                fractionNode.setAttribute('data-index', i);
+                algorithm.appendChild(fractionNode);
+                let decimalNode = document.createElement('div');
+let decimalTextNode = document.createTextNode(`${eval(ascending[i].decimals).
+toPrecision(5).replace(/0+$/, '').replace(/\.$/, '')}`);
+                decimalNode.appendChild(decimalTextNode);
+                decimalNode.setAttribute('class', 'decimalRatio');
+                algorithm.appendChild(decimalNode);
+                let frequencyNode = document.createElement('div');
+let frequencyTextNode = document.createTextNode(`${eval(concertPitch.value* ascending[i].decimals).
+toPrecision(6).replace(/0+$/, '').replace(/\.$/, '')}`);
+                frequencyNode.appendChild(frequencyTextNode);
+                frequencyNode.setAttribute('class', 'frequencyRatio');
+                algorithm.appendChild(frequencyNode);
+            }
+        });
+// same as ascending but descending harmonics
+rithmButtonDescending.addEventListener('click', () => {
+            //removerer
+            ascending = [];
+            descending = [];
+            numerator = 1;
+            denominator = 2;
+            while (fractionRatio.length > 0 && decimalRatio.length > 0) {
+                    for (let i = 0; i < fractionRatio.length; i++) {
+                        fractionRatio[i].parentNode.removeChild(fractionRatio[0])
+                        decimalRatio[i].parentNode.removeChild(decimalRatio[0])
+                        frequencyRatio[i].parentNode.removeChild(frequencyRatio[0])
+                    }
+            }
+    // end of remover
+        descending.push({'fractions':`1/1`, 'decimals':`1`});
+            for (let i = 0; i < howMuch.value; i++) {
+		        if (numerator < denominator) {
+    descending.push({'fractions':`${numerator}/${denominator}`, 'decimals':`${numerator/denominator}`});
+                    numerator++;
+                }
+                if (denominator === numerator) {
+                    numerator = 1;
+                    denominator++;
+                }
+            }
+            for (let i in descending) {
+		        let fractionNode = document.createElement('div');
+                let fractionTextNode = document.createTextNode(`${descending[i].fractions}`);
+                fractionNode.appendChild(fractionTextNode);
+                fractionNode.setAttribute('class', 'fractionRatio');
+                fractionNode.setAttribute('data-index', i);
+                algorithm.appendChild(fractionNode);
+  
+                let decimalNode = document.createElement('div');
+let decimalTextNode = document.createTextNode(`${eval(descending[i].decimals).
+toPrecision(5).replace(/0+$/, '').replace(/\.$/, '')}`);
+                decimalNode.appendChild(decimalTextNode);
+                decimalNode.setAttribute('class', 'decimalRatio');
+                algorithm.appendChild(decimalNode);
+                let frequencyNode = document.createElement('div');
+let frequencyTextNode = document.createTextNode(`${eval(concertPitch.value* descending[i].decimals).
+toPrecision(6).replace(/0+$/, '').replace(/\.$/, '')}`);
+                frequencyNode.appendChild(frequencyTextNode);
+                frequencyNode.setAttribute('class', 'frequencyRatio');
+                algorithm.appendChild(frequencyNode);
+            }
+});
+	  
+      algorithm.addEventListener('click', e => {
+          selectedRatio.innerText = e.target.textContent;
+      });
+      tileBox.addEventListener('click', e => {
+          let indexer = parseInt(e.target.parentNode.getAttribute('data-index'));
+          fractions[indexer].innerText = selectedRatio.textContent;
+          decimals[indexer].innerText = eval(selectedRatio.textContent).toPrecision(4);
+          frequencies[indexer].innerText = (concertPitch.value* eval(selectedRatio.textContent)).toPrecision(5);
+            fractions[indexer].style.color = 'white';
+            decimals[indexer].style.color = 'white';
+            frequencies[indexer].style.color = 'white';
+      });
+let atx;
+document.onclick = () => atx = new AudioContext();
+        class Music {
+            constructor(name, volume, biquad, compressor, index) {
+                this.name = name;
+                this.volume = volume;
+                this.index = index;
+                this.biquad = biquad;
+                this.compressor = compressor;
+                this.playing = false;
+            }
+            on() {
+                if (this.playing === false) {
+                    this.name = atx.createOscillator();
+                    this.volume = atx.createGain();
+                    this.biquad = atx.createBiquadFilter();
+                    this.compressor = atx.createDynamicsCompressor();
+                    this.name.frequency.value = concertPitch.value* eval(fractions[this.index].textContent);
+                    this.name.type = wave.value;
+                    this.name.connect(this.volume).connect(this.biquad).
+                    connect(this.compressor).connect(atx.destination);
+                    this.name.start(0);
+                    this.volume.gain.value = regularVolume.value/10;
+                    this.biquad.type = biquadFilter.value;
+                    this.biquad.frequency.value = biquadFrequency.value;
+                    this.biquad.gain.value = biquadGain.value;
+                    this.biquad.Q.value = biquadQuality.value;
+                    this.compressor.attack.value = compressorAttack.value;
+                    this.compressor.knee.value = compressorKnee.value;
+                    this.compressor.ratio.value = compressorRatio.value;
+                    this.compressor.release.value = compressorRelease.value;
+                    this.compressor.threshold.value = compressorThreshold.value;
+                    this.playing = true;
+                    keymaps[this.index].style.color = 'black';
+                }
+            }
+            off() {
+                this.name.stop(0);
+                this.playing = false;
+                keymaps[this.index].style.color = 'white';
+            }
+            sampleOn(sampleFrequency) {
+                    this.name = atx.createOscillator();
+                    this.volume = atx.createGain();
+                    this.name.frequency.value = sampleFrequency;
+                    this.name.connect(this.volume).connect(atx.destination);
+                    this.name.start(0);
+                    this.volume.gain.value = sampleVolume.value/10;
+            }
+            sampleOff() {
+                this.name.stop(0);
+            }
+}
+let name0, name1, name2, name3, name4, name5, name6, name7, name8, name9, name10, name11, name12, name13, name14, name15, name16, name17, name18, name19, name20, name21, name22, name23, name24, name25, name26, name27, name28, name29, name30, name31, name32, name33, name34, name35, name36, name37, name38, name39, name40;
+let volume0, volume1, volume2, volume3, volume4, volume5, volume6, volume7, volume8, volume9, volume10, volume11, volume12, volume13, volume14, volume15, volume16, volume17, volume18, volume19, volume20, volume21, volume22, volume23, volume24, volume25, volume26, volume27, volume28, volume29, volume30, volume31, volume32, volume33, volume34, volume35, volume36, volume37, volume38, volume39, volume40;
+let biquad0, biquad1, biquad2, biquad3, biquad4, biquad5, biquad6, biquad7, biquad8, biquad9, biquad10, biquad11, biquad12, biquad13, biquad14, biquad15, biquad16, biquad17, biquad18, biquad19, biquad20, biquad21, biquad22, biquad23, biquad24, biquad25, biquad26, biquad27, biquad28, biquad29, biquad30, biquad31, biquad32, biquad33, biquad34, biquad35, biquad36, biquad37, biquad38, biquad39, biquad40;
+let compressor0, compressor1, compressor2, compressor3, compressor4, compressor5, compressor6, compressor7, compressor8, compressor9, compressor10, compressor11, compressor12, compressor13, compressor14, compressor15, compressor16, compressor17, compressor18, compressor19, compressor20, compressor21, compressor22, compressor23, compressor24, compressor25, compressor26, compressor27, compressor28, compressor29, compressor30, compressor31, compressor32, compressor33, compressor34, compressor35, compressor36, compressor37, compressor38, compressor39, compressor40;
+let notes = [
+	new Music(name0, volume0, biquad0, compressor0, 0),
+	new Music(name1, volume1, biquad1, compressor1, 1),
+	new Music(name2, volume2, biquad2, compressor2, 2),
+	new Music(name3, volume3, biquad3, compressor3, 3),
+	new Music(name4, volume4, biquad4, compressor4, 4),
+	new Music(name5, volume5, biquad5, compressor5, 5),
+	new Music(name6, volume6, biquad6, compressor6, 6),
+	new Music(name7, volume7, biquad7, compressor7, 7),
+	new Music(name8, volume8, biquad8, compressor8, 8),
+	new Music(name9, volume9, biquad9, compressor9, 9),
+	new Music(name10, volume10, biquad10, compressor10, 10),
+	new Music(name11, volume11, biquad11, compressor11, 11),
+	new Music(name12, volume12, biquad12, compressor12, 12),
+	new Music(name13, volume13, biquad13, compressor13, 13),
+	new Music(name14, volume14, biquad14, compressor14, 14),
+	new Music(name15, volume15, biquad15, compressor15, 15),
+	new Music(name16, volume16, biquad16, compressor16, 16),
+	new Music(name17, volume17, biquad17, compressor17, 17),
+	new Music(name18, volume18, biquad18, compressor18, 18),
+	new Music(name19, volume19, biquad19, compressor19, 19),
+	new Music(name20, volume20, biquad20, compressor20, 20),
+	new Music(name21, volume21, biquad21, compressor21, 21),
+	new Music(name22, volume22, biquad22, compressor22, 22),
+	new Music(name23, volume23, biquad23, compressor23, 23),
+	new Music(name24, volume24, biquad24, compressor24, 24),
+	new Music(name25, volume25, biquad25, compressor25, 25),
+	new Music(name26, volume26, biquad26, compressor26, 26),
+	new Music(name27, volume27, biquad27, compressor27, 27),
+	new Music(name28, volume28, biquad28, compressor28, 28),
+	new Music(name29, volume29, biquad29, compressor29, 29),
+	new Music(name30, volume30, biquad30, compressor30, 30),
+	new Music(name31, volume31, biquad31, compressor31, 31),
+	new Music(name32, volume32, biquad32, compressor32, 32),
+	new Music(name33, volume33, biquad33, compressor33, 33),
+	new Music(name34, volume34, biquad34, compressor34, 34),
+	new Music(name35, volume35, biquad35, compressor35, 35),
+	new Music(name36, volume36, biquad36, compressor36, 36),
+	new Music(name37, volume37, biquad37, compressor37, 37),
+	new Music(name38, volume38, biquad38, compressor38, 38),
+	new Music(name39, volume39, biquad39, compressor39, 39),
+	new Music(name40, volume40, biquad40, compressor40, 40),
+	
+];
+window.addEventListener('keydown', e => {
+    switch (e.keyCode) {
+        case keyCodes[0].numb:
+        notes[0].on();
+        break;
+        case keyCodes[1].numb:
+        notes[1].on();
+        break;
+        case keyCodes[2].numb:
+        notes[2].on();
+        break;
+        case keyCodes[3].numb:
+        notes[3].on();
+        break;
+        case keyCodes[4].numb:
+        notes[4].on();
+        break;
+        case keyCodes[5].numb:
+        notes[5].on();
+        break;
+        case keyCodes[6].numb:
+        notes[6].on();
+        break;
+        case keyCodes[7].numb:
+        notes[7].on();
+        break;
+        case keyCodes[8].numb:
+        notes[8].on();
+        break;
+        case keyCodes[9].numb:
+        notes[9].on();
+        break;
+        case keyCodes[10].numb:
+        notes[10].on();
+        break;
+        case keyCodes[11].numb:
+        notes[11].on();
+        break;
+        case keyCodes[12].numb:
+        notes[12].on();
+        break;
+        case keyCodes[13].numb:
+        notes[13].on();
+        break;
+        case keyCodes[14].numb:
+        notes[14].on();
+        break;
+        case keyCodes[15].numb:
+        notes[15].on();
+        break;
+        case keyCodes[16].numb:
+        notes[16].on();
+        break;
+        case keyCodes[17].numb:
+        notes[17].on();
+        break;
+        case keyCodes[18].numb:
+        notes[18].on();
+        break;
+        case keyCodes[19].numb:
+        notes[19].on();
+        break;
+        case keyCodes[20].numb:
+        notes[20].on();
+        break;
+        case keyCodes[21].numb:
+        notes[21].on();
+        break;
+        case keyCodes[22].numb:
+        notes[22].on();
+        break;
+        case keyCodes[23].numb:
+        notes[23].on();
+        break;
+        case keyCodes[24].numb:
+        notes[24].on();
+        break;
+        case keyCodes[25].numb:
+        notes[25].on();
+        break;
+        case keyCodes[26].numb:
+        notes[26].on();
+        break;
+        case keyCodes[27].numb:
+        notes[27].on();
+        break;
+        case keyCodes[28].numb:
+        notes[28].on();
+        break;
+        case keyCodes[29].numb:
+        notes[29].on();
+        break;
+        case keyCodes[30].numb:
+        notes[30].on();
+        break;
+        case keyCodes[31].numb:
+        notes[31].on();
+        break;
+        case keyCodes[32].numb:
+        notes[32].on();
+        break;
+        case keyCodes[33].numb:
+        notes[33].on();
+        break;
+        case keyCodes[34].numb:
+        notes[34].on();
+        break;
+        case keyCodes[35].numb:
+        notes[35].on();
+        break;
+        case keyCodes[36].numb:
+        notes[36].on();
+        break;
+        case keyCodes[37].numb:
+        notes[37].on();
+        break;
+        case keyCodes[38].numb:
+        notes[38].on();
+        break;
+        case keyCodes[39].numb:
+        notes[39].on();
+        break;
+    }
+});
+window.addEventListener('keyup', e => {
+    switch (e.keyCode) {
+		case keyCodes[0].numb:
+			notes[0].off();
+			break;
+			case keyCodes[1].numb:
+			notes[1].off();
+			break;
+			case keyCodes[2].numb:
+			notes[2].off();
+			break;
+			case keyCodes[3].numb:
+			notes[3].off();
+			break;
+			case keyCodes[4].numb:
+			notes[4].off();
+			break;
+			case keyCodes[5].numb:
+			notes[5].off();
+			break;
+			case keyCodes[6].numb:
+			notes[6].off();
+			break;
+			case keyCodes[7].numb:
+			notes[7].off();
+			break;
+			case keyCodes[8].numb:
+			notes[8].off();
+			break;
+			case keyCodes[9].numb:
+			notes[9].off();
+			break;
+			case keyCodes[10].numb:
+			notes[10].off();
+			break;
+			case keyCodes[11].numb:
+			notes[11].off();
+			break;
+			case keyCodes[12].numb:
+			notes[12].off();
+			break;
+			case keyCodes[13].numb:
+			notes[13].off();
+			break;
+			case keyCodes[14].numb:
+			notes[14].off();
+			break;
+			case keyCodes[15].numb:
+			notes[15].off();
+			break;
+			case keyCodes[16].numb:
+			notes[16].off();
+			break;
+			case keyCodes[17].numb:
+			notes[17].off();
+			break;
+			case keyCodes[18].numb:
+			notes[18].off();
+			break;
+			case keyCodes[19].numb:
+			notes[19].off();
+			break;
+			case keyCodes[20].numb:
+			notes[20].off();
+			break;
+			case keyCodes[21].numb:
+			notes[21].off();
+			break;
+			case keyCodes[22].numb:
+			notes[22].off();
+			break;
+			case keyCodes[23].numb:
+			notes[23].off();
+			break;
+			case keyCodes[24].numb:
+			notes[24].off();
+			break;
+			case keyCodes[25].numb:
+			notes[25].off();
+			break;
+			case keyCodes[26].numb:
+			notes[26].off();
+			break;
+			case keyCodes[27].numb:
+			notes[27].off();
+			break;
+			case keyCodes[28].numb:
+			notes[28].off();
+			break;
+			case keyCodes[29].numb:
+			notes[29].off();
+			break;
+			case keyCodes[30].numb:
+			notes[30].off();
+			break;
+			case keyCodes[31].numb:
+			notes[31].off();
+			break;
+			case keyCodes[32].numb:
+			notes[32].off();
+			break;
+			case keyCodes[33].numb:
+			notes[33].off();
+			break;
+			case keyCodes[34].numb:
+			notes[34].off();
+			break;
+			case keyCodes[35].numb:
+			notes[35].off();
+			break;
+			case keyCodes[36].numb:
+			notes[36].off();
+			break;
+			case keyCodes[37].numb:
+			notes[37].off();
+			break;
+			case keyCodes[38].numb:
+			notes[38].off();
+			break;
+			case keyCodes[39].numb:
+			notes[39].off();
+			break;
+    }
+});
+algorithm.addEventListener('mouseover', e => {
+    let myDataIndex = parseInt(e.target.getAttribute('data-index'));
+    notes[40].sampleOn(concertPitch.value* eval(fractionRatio[myDataIndex].textContent));
+});
+algorithm.addEventListener('mouseout', e => {
+    notes[40].sampleOff();
+});
+concertPitch.addEventListener('change', () => {
+    for (let i in frequencies) {
+        if (eval(frequencies[i].textContent) > 0) {
+            frequencies[i].innerText = eval(concertPitch.value* eval(decimals[i].textContent)).toPrecision(5);
+        }
+    }
+    for (let i in frequencyRatio) {
+        frequencyRatio[i].innerText = eval(concertPitch.value* eval(decimalRatio[i].textContent)).toPrecision(6).
+        replace(/0+$/, '').replace(/\.$/, '');
+    }
+});
+let originalValue, originalIndex, newIndex;
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+function drag(ev) {
+  originalValue = ev.target.textContent;
+  originalIndex = parseInt(ev.target.id.replace(/tile/, ''))
+}
+function drop(ev) {
+  ev.preventDefault();
+  newIndex = parseInt(ev.target.id.replace(/tile/, ''))
+  ev.target.innerText = originalValue;
+  decimals[newIndex].innerText = eval(originalValue).toPrecision(5);
+  frequencies[newIndex].innerText = eval(eval(originalValue) * concertPitch.value)
+    .toPrecision(5);
+  fractions[newIndex].style.color = 'white';
+  decimals[newIndex].style.color = 'white';
+  frequencies[newIndex].style.color = 'white';
+  fractions[originalIndex].textContent = '.';
+  decimals[originalIndex].textContent = '.';
+  frequencies[originalIndex].textContent = '.';
+  fractions[originalIndex].style.color = '#ff005d'
+  decimals[originalIndex].style.color = '#ff005d'
+  frequencies[originalIndex].style.color = '#ff005d'
+}
+biquadFilter.addEventListener('change', () => {
+	switch (biquadFilter.value) {
+		case 'lowpass':
+			biquadFrequencyContainer.hidden = false;
+			biquadQualityContainer.hidden = false;
+			biquadGainContainer.hidden = true;
+		break;
+		case 'highpass':
+			biquadFrequencyContainer.hidden = false;
+			biquadQualityContainer.hidden = false;
+			biquadGainContainer.hidden = true;
+		break;
+		case 'bandpass':
+			biquadFrequencyContainer.hidden = false;
+			biquadQualityContainer.hidden = false;
+			biquadGainContainer.hidden = true;
+		break;
+		case 'lowshelf':
+			biquadFrequencyContainer.hidden = false;
+			biquadQualityContainer.hidden = true;
+			biquadGainContainer.hidden = false;
+		break;
+		case 'highshelf':
+			biquadFrequencyContainer.hidden = false;
+			biquadQualityContainer.hidden = true;
+			biquadGainContainer.hidden = false;
+		break;
+		case 'peaking':
+			biquadFrequencyContainer.hidden = false;
+			biquadQualityContainer.hidden = false;
+			biquadGainContainer.hidden = false;
+		break;
+		case 'notch':
+			biquadFrequencyContainer.hidden = false;
+			biquadQualityContainer.hidden = false;
+			biquadGainContainer.hidden = true;
+		break;
+		case 'allpass':
+			biquadFrequencyContainer.hidden = false;
+			biquadQualityContainer.hidden = false;
+			biquadGainContainer.hidden = true;
+		break;
+	}	
+})
+    </script>
+</html>

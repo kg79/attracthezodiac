@@ -1,0 +1,88 @@
+
+
+
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            :root {
+                --goldilox:#e0d313;
+                --cap-blue:#00aeff;
+
+            } body {
+                margin:0;
+                background:var(--cap-blue);
+            } h1, h2 {
+                font-family:sans-serif;
+                text-align:center;
+                background:var(--cap-blue);
+                margin:0;
+                color:var(--goldilox);
+            }  nav {
+                display:flex;
+                justify-content:space-around;
+                background:var(--goldilox);
+                margin:0;
+            } a {
+                color:var(--cap-blue);
+                font-family:sans-serif;
+            } table {
+                border-collapse:collapse;
+                margin:auto;
+                margin-top:1em;
+                font-family:sans-serif;
+                text-align:center;
+                cursor:pointer;
+            } td, th {
+                border:solid 1px var(--goldilox);
+            }
+        </style>
+    </head>
+    <body>
+        <h1>
+            Search Results
+        </h1>
+        <nav>
+            <a href='/info'>info</a>
+            <a href='/search'>search</a>
+            <a href='/editProfile'>edit profile</a>
+            <a href='/messages'>messages</a>
+         </nav>
+        <h2>
+            <%= data[0].tropical %> <%= data[0].chinese %>
+        </h2>
+        <table id='playArea'>
+            <th>name</th><th>birthday</th><th>element</th><th>picture</th><th>spiel</th>
+            <% for (let i = 0; i < data.length; i++) { %>
+            <tr data-index='<%= i %>'>
+                <td class='peoplesNames'><%= data[i].username %></td>
+                <td>
+                    <%= data[i].birthday %>
+                </td>
+                <td>
+                    <%= data[i].element %>
+                </td>
+                <td>
+                    <img src="data:image/jpeg;base64, <%= data[i].pictureData %>" height='200'/>
+                </td>
+                <td>
+                    <%= data[i].spiel %>
+                </td>
+            </tr>
+            <% } %>
+        </table>
+    </body>
+    <script>
+        const playArea = document.getElementById('playArea');
+        const peoplesNames = document.getElementsByClassName('peoplesNames');
+
+        playArea.addEventListener('click', e => {
+            let dataIndex = parseInt(e.target.parentNode.getAttribute('data-index'));
+            let person = peoplesNames[dataIndex].textContent;
+            document.cookie = `search=${person}`
+            window.location = '/profile';
+
+        })
+    </script>
+</html>

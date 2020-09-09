@@ -1,0 +1,220 @@
+<!doctype html>
+<html>
+    <head>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <style>
+            :root {
+                --goldilox:#e0d313;
+                --cap-blue:#00aeff;
+            } body {
+                margin:0;
+                background:var(--cap-blue);
+                font-family:sans-serif;
+
+            } h1 {
+                font-family:sans-serif;
+                text-align:center;
+                background:var(--cap-blue);
+                margin:0;
+                color:var(--goldilox);
+            } nav {
+                display:flex;
+                justify-content:space-around;
+                background:var(--goldilox);
+                margin:0;
+            } a {
+                color:var(--cap-blue);
+                font-family:sans-serif;
+            } form {
+                background:white;
+                width:fit-content;
+                margin:auto;
+                margin-top:3em;
+                text-align:center;
+                background:var(--cap-blue);
+                border:solid 2px var(--goldilox);
+                padding:1%;
+            } label {
+                color:var(--goldilox);
+            }
+        </style>
+    </head>
+    <body>
+        <h1>
+            Edit Profile
+        </h1>
+        <nav>
+            <a href='/info'>info</a>
+            <a href='/search'>search</a>
+            <a href='/editProfile'>edit profile</a>
+            <a href='/messages'>messages</a>
+        </nav>
+
+        <form action='/uploadPic' method='POST' enctype='multipart/form-data'>
+            <label>Upload Profile Pic</label><br/>
+            <input type='file' name='pic'><br/>
+            <input type='hidden' id='user'>
+            <input type='submit'>
+        </form>
+
+        <form action='/uploadSpiel' method='POST'>
+            <label>update spiel</label><br/>
+            <textarea name='spiel'></textarea><br/>
+            <input type='submit'>
+        </form>
+
+        
+        <form action='/uploadBio' method='POST'>
+            <label>update bio</label><br/>
+            <textarea name='bio'></textarea><br/>
+            <input type='submit'>
+        </form>
+
+        <form action='/uploadQuestions' method='POST'>
+            <label>update questions</label><br/>
+            <table>
+                <tr>
+                    <td>
+                        likes?
+                    </td>
+                    <td>
+                        <input name='likes'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        dislikes?
+                    </td>
+                    <td>
+                        <input name='dislikes'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        loves?
+                    </td>
+                    <td>
+                        <input name='loves'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        hates?
+                    </td>
+                    <td>
+                        <input name='hates'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        guilty pleasures?
+                    </td>
+                    <td>
+                        <input name='guiltyPleasures'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        music?
+                    </td>
+                    <td>
+                        <input name='music'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        fun?
+                    </td>
+                    <td>
+                        <input name='fun'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        work?
+                    </td>
+                    <td>
+                        <input name='work'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        movies?
+                    </td>
+                    <td>
+                        <input name='movies'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        sex?
+                    </td>
+                    <td>
+                        <input name='sex'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        drugs/alcohol?
+                    </td>
+                    <td>
+                        <input name='drugsAlcohol'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        tobacco?
+                    </td>
+                    <td>
+                        <input name='tobacco'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        food?
+                    </td>
+                    <td>
+                        <input name='food'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        respects?
+                    </td>
+                    <td>
+                        <input name='respects'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        comedy?
+                    </td>
+                    <td>
+                        <input name='comedy'>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        art?
+                    </td>
+                    <td>
+                        <input name='art'>
+                    </td>
+                </tr>
+            </table>
+            <input type='submit'>
+        </form>
+
+    </body>
+    <script>
+        // const user = document.getElementById('user');
+
+        // console.log(document.cookie.split('=')[1]);
+
+        // node.js cookie parser 
+
+
+   </script>
+</html>
+

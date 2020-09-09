@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+    <head>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <style>
+            :root {
+                --goldilox:#e0d313;
+                --cap-blue:#00aeff;
+
+            }
+            body {
+                margin:0;
+            }
+            h1, h2 {
+                font-family:sans-serif;
+                text-align:center;
+                background:var(--cap-blue);
+                margin:0;
+                color:var(--goldilox);
+                height:10vh;
+
+              
+               
+            } span {
+                text-decoration:underline;
+            } nav {
+                display:flex;
+                justify-content:space-around;
+                background:var(--goldilox);
+                margin:0;
+                height:5vh;
+            } a {
+                color:var(--cap-blue);
+                font-family:sans-serif;
+            } main {
+               height:75vh;
+               background:var(--cap-blue); 
+               display:flex;
+               justify-content:center;
+               align-items:center;
+            } section {
+                text-align:center;
+            }
+            
+            article {
+
+
+                background:var(--cap-blue);
+                color:var(--goldilox);
+                margin:auto;
+                text-align:center;
+                font-family:sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+    <h1>
+        Welcome <span id='userTitle'></span>!
+    </h1>
+
+    <h2>
+    You are a <span id='tropical'></span> <span id='chineseSign'> </span> of the element <span id='chineseElement'></span>! 
+    </h2>
+<nav>
+    <a href='/info'>info</a>
+    <a href='/search'>search</a>
+    <a href='/editProfile'>edit profile</a>
+    <a href='/messages'>messages</a>
+</nav>
+<main>
+    <section>
+        <article id='tropicalSpiel'></article>
+        <article id='chineseSpiel'></article>
+        <article id='elementSpiel'></article>
+    </section>
+    
+
+</main>
+
+    </body>
+    <script>
+const userTitle = document.getElementById('userTitle');
+
+
+document.addEventListener('DOMContentLoaded', () => {
+   userTitle.innerText = document.cookie.split('=')[1];
+    
+})
+
+   </script>
+</html>
+

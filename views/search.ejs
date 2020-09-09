@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+    <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            :root {
+                --goldilox:#e0d313;
+                --cap-blue:#00aeff;
+
+            }
+            body {
+                margin:0;
+                background:var(--cap-blue);
+            }
+            h1, h2 {
+                font-family:sans-serif;
+                text-align:center;
+                background:var(--cap-blue);
+                margin:0;
+                color:var(--goldilox);
+                height:10vh;
+            } nav {
+                display:flex;
+                justify-content:space-around;
+                background:var(--goldilox);
+                margin:0;
+                height:5vh;
+                align-items:center;
+            } a {
+                color:var(--cap-blue);
+                font-family:sans-serif;
+            } form {
+                background:var(--cap-blue);
+                width:10em;
+                margin:auto;
+                padding:1%;
+                text-align:center;
+                margin-top:1em;
+                
+            } label {
+                margin:1%;
+                
+            } 
+            select {
+                margin-top:1em;
+            } input {
+                margin-top:1em;
+            }
+        </style>
+
+    </head>
+    <body>
+        <h1>Search</h1>
+<nav>
+    <a href='/info'>info</a>
+    <a href='/search'>search</a>
+    <a href='/editProfile'>edit profile</a>
+    <a href='/messages'>messages</a>
+</nav>
+<form action='/searching' method='GET'>
+    <label>Tropical</label>
+    <select name="tropical" id="tropical">
+        <option value="Aries">Aries</option>
+        <option value="Taurus">Taurus</option>
+        <option value="Gemini">Gemini</option>
+        <option value="Cancer">Cancer</option>
+        <option value="Leo">Leo</option>
+        <option value="Virgo">Virgo</option>
+        <option value="Libra">Libra</option>
+        <option value="Scorpio">Scorpio</option>
+        <option value="Sagittarius">Sagittarius</option>
+        <option value="Capricorn">Capricorn</option>
+        <option value="Aquarius">Aquarius</option>
+        <option value="Pisces">Pisces</option>
+      </select><br/>
+    <label>Chinese</label>
+    <select name='chinese' id='chinese'>
+        <option value='rat'>Rat</option>
+        <option value='ox'>Ox</option>
+        <option value='tiger'>Tiger</option>
+        <option value='rabbit'>Rabbit</option>
+        <option value='dragon'>Dragon</option>
+        <option value='snake'>Snake</option>
+        <option value='horse'>Horse</option>
+        <option value='goat'>Goat</option>
+        <option value='monkey'>Monkey</option>
+        <option value='rooster'>Rooster</option>
+        <option value='dog'>Dog</option>
+        <option value='pig'>Pig</option>
+    </select><br/>
+    <input type='submit'>
+</form>
+    </body>
+    <script>
+
+    </script>
+</html>

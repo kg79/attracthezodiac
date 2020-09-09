@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            :root {
+                --goldilox:#e0d313;
+                --cap-blue:#00aeff;
+            } body {
+                margin:0;
+                background:var(--cap-blue);
+                font-family:sans-serif;
+            } h1 {
+                font-family:sans-serif;
+                text-align:center;
+                background:var(--cap-blue);
+                margin:0;
+                color:var(--goldilox);
+            } nav { 
+                display:flex;
+                justify-content:space-around;
+                background:var(--goldilox);
+                margin:0;
+                height:5vh;
+                align-items:center;
+            } a {
+                color:var(--cap-blue);
+                font-family:sans-serif;
+            } div {
+                /* width:fit-content; */
+                text-align:center;
+                margin:auto;
+                text-decoration:underline;
+                color:var(--goldilox);
+                cursor:pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Messages</h1>
+        <nav>
+            <a href='/info'>info</a>
+            <a href='/search'>search</a>
+            <a href='/editProfile'>edit profile</a>
+            <a href='/messages'>messages</a>
+        </nav>
+        <article id='playZone'>
+            <% for (let i = 0; i < data.length; i++) { %>
+                <div><%= data[i].receiver %></div>
+            <% } %>
+        </article>
+    </body>
+    <script>
+        const divs = document.getElementsByTagName('div');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            for (let j = 0; j < divs.length; j++) {
+                for (let i = 1; i < divs.length; i++) {
+                    if (divs[i].textContent === divs[i-1].textContent) {
+                        divs[i].parentNode.removeChild(divs[i]);
+                    }   
+                }
+            }
+        });
+
+        const playZone = document.getElementById('playZone');
+
+        playZone.addEventListener('click', e => {
+            document.cookie = `messagesFrom=${e.target.textContent}`;
+		location.pathname = '/getMessages';
+        })
+
+
+    </script>
+</html>

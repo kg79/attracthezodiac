@@ -1,0 +1,480 @@
+<!doctype html>
+<html>
+    <head>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <style>
+            :root {
+                --goldilox:#e0d313;
+                --cap-blue:#00aeff;
+
+            }
+            body {
+                margin:0;
+            }
+            h1, h2 {
+                font-family:sans-serif;
+                text-align:center;
+                background:var(--cap-blue);
+                margin:0;
+                color:var(--goldilox);
+                height:10vh;
+
+              
+               
+            } span {
+                text-decoration:underline;
+            } nav {
+                display:flex;
+                justify-content:space-around;
+                background:var(--goldilox);
+                margin:0;
+                height:5vh;
+            } a {
+                color:var(--cap-blue);
+                font-family:sans-serif;
+            } main {
+               height:75vh;
+               background:var(--cap-blue); 
+               display:flex;
+               justify-content:center;
+               align-items:center;
+            } section {
+                text-align:center;
+            }
+            
+            article {
+
+
+                background:var(--cap-blue);
+                color:var(--goldilox);
+                margin:auto;
+                text-align:center;
+                font-family:sans-serif;
+            }
+        </style>
+    </head>
+    <body>
+    <h1>
+        Welcome <span id='usernameTitle'><%= data[0].username %></span>!
+    </h1>
+
+    <h2>
+    You are a <span id='tropical'></span> <span id='chineseSign'> </span> of the element <span id='chineseElement'></span>! 
+    </h2>
+<nav>
+    <a href='/info'>info</a>
+    <a href='/search'>search</a>
+    <a href='/editProfile'>edit profile</a>
+    <a href='/messages'>messages</a>
+</nav>
+<main>
+    <section>
+        <article id='tropicalSpiel'></article>
+        <article id='chineseSpiel'></article>
+        <article id='elementSpiel'></article>
+    </section>
+    <span id='birthday' style='visibility:hidden;'><%= data[0].birthday %></span>
+
+</main>
+
+    </body>
+    <script>
+
+let newYears = [
+    ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        '02-08',//40
+        '01-27',//41
+        '02-15',//42
+        '02-04',//43
+        '01-25',//44
+        '02-13',//45
+        '02-01',//46
+        '01-22',//47
+        '02-10',//48
+        '01-29',//49
+        '02-17',//50
+        '02-06',//51
+        '01-27',//52
+        '02-14',//53
+        '02-03',//54
+        '01-24',//55
+        '02-12',//56
+        '01-31',//57
+        '02-18',//58
+        '02-08',//59
+        '01-28',//60
+        '02-15',//61
+        '02-05',//62
+        '01-25',//63
+        '02-13',//64
+        '02-02',//65
+        '01-21',//66
+        '02-09',//67
+        '01-30',//68
+        '02-17',//69
+        '02-06',//70
+        '01-27',//71
+        '02-15',//72
+        '02-03',//73
+        '01-23',//74
+        '02-11',//75
+        '01-31',//76
+        '02-18',//77
+        '02-07',//78
+        '01-28',//79
+        '02-16',//80
+        '02-05',//81
+        '01-25',//82
+        '02-13',//83
+        '02-02',//84
+        '02-20',//85
+        '02-09',//86
+        '01-29',//87
+        '02-17',//88
+        '02-06',//89
+        '01-27',//90
+        '02-15',//91
+        '02-04',//92
+        '01-23',//93
+        '02-10',//94
+        '01-31',//95
+        '02-19',//96
+        '02-07',//97
+        '01-28',//98
+        '02-16',//99
+        '02-05',//00
+        '01-24',//01
+        '02-12',//02
+    ];
+
+    let elements = [
+    ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+        'metal', 'metal', 'water', 'water', 'wood', 'wood', 'fire', 'fire', 'earth', 'earth',
+        'metal', 'metal', 'water', 'water', 'wood', 'wood', 'fire', 'fire', 'earth', 'earth',
+        'metal', 'metal', 'water', 'water', 'wood', 'wood', 'fire', 'fire', 'earth', 'earth',
+        'metal', 'metal', 'water', 'water', 'wood', 'wood', 'fire', 'fire', 'earth', 'earth',
+        'metal', 'metal', 'water', 'water', 'wood', 'wood', 'fire', 'fire', 'earth', 'earth',
+        'metal', 'metal', 'water', 'water', 'wood', 'wood', 'fire', 'fire', 'earth', 'earth',
+        'metal', 'metal'
+    ];
+
+        const birthday = document.getElementById('birthday');
+        const chineseSign = document.getElementById('chineseSign')
+    
+
+
+    let year = parseInt(birthday.textContent.match(/[0-9]{4}/)[0]);
+
+    let chineseBirthYear = parseInt(year.toString().match(/[0-9]{2}$/)[0]);
+
+    if (chineseBirthYear < 40) {
+        chineseBirthYear += 100;
+    }
+
+    let monthOfBirth = parseInt(birthday.textContent[5] + birthday.textContent[6])
+    let monthOfChineseNewYear = parseInt(newYears[chineseBirthYear][0] + newYears[chineseBirthYear][1])
+
+    let dayOfBirth = parseInt(birthday.textContent[8] + birthday.textContent[9])
+    let dayOfChineseNewYear = parseInt(newYears[chineseBirthYear][3] + newYears[chineseBirthYear][4])
+
+ 
+    if (monthOfBirth < monthOfChineseNewYear && dayOfBirth < dayOfChineseNewYear) {
+        year -= 1;        
+        chineseBirthYear -=1;
+    }
+
+   
+const chineseElement = document.getElementById('chineseElement');
+
+let element = elements[chineseBirthYear];
+
+chineseElement.innerText = element;
+
+
+        let chinese;
+            switch (year % 12) {
+                case 0:
+                    chinese = 'monkey';
+                break;
+                case 1:
+                    chinese = 'rooster';
+                break;
+                case 2: 
+                    chinese = 'dog';
+                break;
+                case 3:
+                    chinese = 'pig';
+                break;
+                case 4:
+                    chinese ='rat';
+                break;
+                case 5:
+                    chinese ='ox';
+                break;
+                case 6:
+                    chinese = 'tiger';
+                break;
+                case 7:
+                    chinese ='rabbit';
+                break;
+                case 8:
+                    chinese ='dragon';
+                break;
+                case 9:
+                    chinese = 'snake';
+                break;
+                case 10:
+                    chinese = 'horse';
+                break;
+                case 11:
+                    chinese = 'goat';
+                break;
+            }
+
+
+chineseSign.innerText = chinese;
+
+
+let month = parseInt(birthday.textContent[5] + birthday.textContent[6]);
+let day = parseInt(birthday.textContent[8] + birthday.textContent[9]);
+
+
+let tropicalSign;
+
+if (month == 3 && day >= 21 || month == 4 && day < 21) {
+    tropicalSign = 'Aries';
+} else if (month == 4 && day >= 21 || month == 5 && day < 22) {
+    tropicalSign = 'Taurus';
+} else if (month == 5 && day >= 22 || month == 6 && day < 22) {
+    tropicalSign = 'Gemini';
+} else if (month == 6 && day >= 22 || month == 7 && day < 23) {
+    tropicalSign = 'Cancer';
+} else if (month == 7 && day >= 23 || month == 8 && day < 23) {
+    tropicalSign = 'Leo';
+} else if (month == 8 && day >= 23 || month == 9 && day < 23) {
+    tropicalSign = 'Virgo';
+} else if (month == 9 && day >= 23 || month == 10 && day < 23) {
+    tropicalSign = 'Libra';
+} else if (month == 10 && day >= 23 || month == 11 && day < 22) {
+    tropicalSign = 'Scorpio';
+} else if (month == 11 && day >= 22 || month == 12 && day < 22) {
+    tropicalSign = 'Sagittarius';
+} else if (month == 12 && day >= 22 || month == 1 && day < 20) {
+    tropicalSign = 'Capricorn';
+} else if (month == 1 && day >= 20 || month == 2 && day < 20) {
+    tropicalSign = 'Aquarius';
+} else if (month == 2 && day >= 20 || month == 3 && day < 21) {
+    tropicalSign = 'Pisces';
+}
+const tropical = document.getElementById('tropical');
+tropical.innerText = tropicalSign;
+
+
+
+const tropicalSpiel = document.getElementById('tropicalSpiel');
+
+
+    switch (tropicalSign) {
+        case 'Aries':
+        tropicalSpiel.innerText = `
+           Aries is energetic, straight forward, and brave. They are good at initializing activities 
+           with an intensity, and any mistakes they make with poor planning can easily be made up with yet more 
+           dynamism.
+            `;
+        break;
+        case 'Taurus':
+  tropicalSpiel.innerText = `
+            Taureans are reliable, stubborn, and connoisseur's of pleasure from all senses. 
+            Capabale of storing much energy, they are ready to endure patiently until prospects reach fruition. 
+            `;
+        break;
+        case 'Gemini':
+  tropicalSpiel.innerText = `
+            Gemini is the definitive human sign, representing all aspects of the human condition most accurately. 
+            Endowed with the ability of expression and lightning fast wit, this jack of all trades mercurial tendencies 
+            can excel in a variety of departments. 
+            `;
+        break;
+        case 'Cancer':
+  tropicalSpiel.innerText = `
+            Cancer is an intuitive and creative sign that values security in home, finances, and emotions. They can 
+            seem crusty on the outside, until you gain the trust of this intelligent and funny leader. 
+            `;
+        break;
+        case 'Leo':
+  tropicalSpiel.innerText = `
+            Leo is a sign of pride, ego and self-expression. Creative, likeable, and generous, this dominant individual 
+            harness' the power of the sun to illuminate their surroundings. 
+            `;
+        break;
+        case 'Virgo':
+  tropicalSpiel.innerText = `
+            Virgos are intelligent, detail oriented and methodical. Their realistic view on reality can lead to 
+            pessimism, due to the inevitability of their perfectionism going unsatisfied.
+            `;
+        break;
+        case 'Libra':
+  tropicalSpiel.innerText = `
+            Libras are a sign of harmony, social grace, and partnership. Ruled by Venus, they are naturally artistic, and 
+            as an air sign they are communicative. They like to be the best, and impress people with their 
+            outlandish antics. Being that Libra's are the newest sign, they can also be frivolous, deceptive, 
+            duplicitious, and sadistic. 
+            `;
+        break;
+        case 'Scorpio':
+  tropicalSpiel.innerText = `
+            Scorpios are a sign of intensity, passion, and emotions. They get deeply involved in love and relationships, 
+            and are prone to revenge if irrevocably slighted. Like a scorpion in your shoe, they can exist under the 
+            radar until the opportune moment when you will no longer ignore their presence and power. 
+            `;
+        break;
+        case 'Sagittarius':
+            tropicalSpiel.innerText = `
+            Sagittarians are somewhat of a jovial clownish philosopher. They have an open-minded and no strings 
+            attached philosophy, seeking to understand and travel the world. Being the archer, they are straight 
+            shooters, and can suffer from foot in mouth syndrome with their blunt language. 
+            `;
+        break;
+        case 'Capricorn':
+            tropicalSpiel.innerText = `
+            Capricorn implies you are a hardworking individual that epitomizes the zenith of  
+            aspiration. The leader of signs, well rounded and ambitious, shows much prowess in all endeavors.  
+            `;
+        break;
+        case 'Aquarius':
+            tropicalSpiel.innerText = `
+                Aquarians are natural innovators, and not only do they walk to the beat of a different drummer, they 
+                probably crafted the drum itself. Humanitarian, intellectual, and communicative, they have great 
+                ability to connect with people.  
+            `;
+        break;
+        case 'Pisces':
+            tropicalSpiel.innerText = `
+                Pisces are comprised of all the the qualities of the zodiac. Mystical, inuitive, psychic, creative, 
+                Pisces see's into the spritual realm. The two fish swimming in opposite directions represent the 
+                humans power of choice, the master of one's own fate, for better or worse.  
+            `;
+            
+        break;
+
+    }
+const chineseSpiel = document.getElementById('chineseSpiel');
+
+switch (chinese) {
+    case 'rat':
+        chineseSpiel.innerText = `
+            The rat is intelligent, sociable, and energetic.         
+        `;
+    break;
+    case 'ox':
+   chineseSpiel.innerText = `
+        Oxes are known for being hardworking, strong, dependable, and honest. 
+        `;
+
+    break;
+    case 'tiger':
+   chineseSpiel.innerText = `
+        Tigers are known as brave, competitive, and thrill seeking. 
+        `;
+
+    break;
+    case 'rabbit':
+   chineseSpiel.innerText = `
+            Rabbits are known as intelligent, elegant, sensitive, and appreciative of the finer things in life. 
+        `;
+
+    break;
+    case 'dragon':
+   chineseSpiel.innerText = `
+        Dragons are powerful, assertive, enthusiastic, egotistical, and doesn't take criticism well. 
+        `;
+
+    break;
+    case 'snake':
+   chineseSpiel.innerText = `
+        Snakes are wise, good at speaking, suceeding in life, and overly sexual. 
+        `;
+
+    break;
+    case 'horse':
+   chineseSpiel.innerText = `
+        Horse's are energetic, very apt with skills, hardworking, sociable, and like to perform. 
+        `;
+
+    break;
+    case 'goat':
+   chineseSpiel.innerText = `
+        Goats are naturally artistic, creative, stylish, and reserved. While they don't like to be the center of 
+        attention, they like to be recognized for their unique skills. 
+        `;
+
+    break;
+    case 'monkey':
+   chineseSpiel.innerText = `
+        Monkey's are witty, intelligent, curious and versatile. They like practical jokes and breaking the rules, and not 
+        everyone responds to their relentless ruse. 
+        `;
+
+    break;
+    case 'rooster':
+   chineseSpiel.innerText = `
+        Roosters are active, sociable, honest, and artistic. They like being attractive, loyal, and expressing their opinions. 
+        `;
+
+    break;
+    case 'dog':
+   chineseSpiel.innerText = `
+        Dogs are loyal, nice, sociable, somewhat cautious and anxious. They like to perform for others, 
+        and are well liked by peers. 
+        `;
+
+    break;
+    case 'pig':
+   chineseSpiel.innerText = `
+        Pigs are hardworking, generous, and nice. They concentrate on their tasks well, and thrive at their 
+        ambitions. Though bubbly and humorous on the outside, they have a dark side as well. 
+        `;
+
+    break;
+}
+
+const elementSpiel = document.getElementById('elementSpiel');
+
+switch (element) {
+    case 'wood':
+       elementSpiel.innerText = `
+        Wood is hardworking, benevolent, and cares for others. It is naturally patient and sensitive.  
+       `;
+    break;
+    case 'fire':
+elementSpiel.innerText = `
+       Fire is energetic, aggressive and relentless. 
+       `;
+    break;
+    case 'earth':
+elementSpiel.innerText = `
+       Earth is stabalizing, calm, diplomatic, and has a natural grasp of worldly endeavours. 
+       `;
+    break;
+    case 'metal':
+elementSpiel.innerText = `
+       Metal is tough, determined, and creative. 
+       `;
+    break;
+    case 'water':
+elementSpiel.innerText = `
+       Water is creative, wise, calm, intuitive and reflective. 
+       `;
+    break;
+}
+const usernameTitle = document.getElementById('usernameTitle');
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.cookie = `username=${usernameTitle.textContent}`
+    
+})
+
+   </script>
+</html>
+

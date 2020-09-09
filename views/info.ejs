@@ -1,0 +1,391 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>            
+        :root {
+            --goldilox:#e0d313;
+            --cap-blue:#00aeff;
+
+        } body, html {
+            margin:0;
+            font-family:sans-serif;
+        }
+
+        h1 {
+            text-align:center;
+            height:10vh;
+            margin:0;
+            color:var(--goldilox);
+            
+            background:var(--cap-blue);
+
+
+        } nav {
+            height:5vh;
+            background:var(--goldilox);
+            display:flex;
+            justify-content:space-around;
+            align-items:center;
+       } a {
+            color:var(--cap-blue);
+
+       }
+            main {
+                background:var(--cap-blue);
+
+            } #westernTable {
+                margin:auto;
+            }
+            table {
+                border-collapse:collapse;
+                margin:auto;
+                color:var(--goldilox);
+
+            } td, th {
+                border:solid 1px black;
+                text-align:center;
+            }
+            #western, #chinese {
+
+            } article {
+                text-align:center;
+                color:var(--goldilox);
+                padding-top:1em;
+                font-weight:bold;
+                text-decoration:underline;
+            } dl {
+                color:var(--goldilox);
+            } @media (orientation: landscape) {
+                dl {
+                    width:75vw;
+                    margin:auto;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <h1>
+            Info
+        </h1>
+        <nav>
+            <a href='/info'>info</a>
+            <a href='/search'>search</a>
+            <a href='/editProfile'>edit profile</a>
+            <a href='/messages'>messages</a>
+        </nav>
+        <main>
+            <section id='westernTable'>
+                <table cellpadding='4px'>
+
+                    <th>Sign</th><th>Dates</th><th>Element</th><th>Quality</th><th>Chinese Twin</th>
+                    <tr>
+                        <td>
+                            Aries
+                        </td>
+                        <td>
+                            3/21-4/20
+                        </td>
+                        <td>
+                            Fire
+                        </td>
+                        <td>
+                            Cardinal
+                        </td>
+                        <td>
+                            Dragon
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Taurus
+                        </td>
+                        <td>
+                            4/21-5/21
+                        </td>
+                        <td>
+                            Earth
+                        </td>
+                        <td>
+                            Fixed
+                        </td>
+                        <td>
+                            Snake
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Gemini
+                        </td>
+                        <td>
+                            5/22-6/21
+                        </td>
+                        <td>
+                            Air
+                        </td>
+                        <td>
+                            Mutable
+                        </td>
+                        <td>
+                            Horse
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Cancer
+                        </td>
+                        <td>
+                            6/22-7/22
+                        </td>
+                        <td>
+                            Water
+                        </td>
+                        <td>
+                            Cardinal
+                        </td>
+                        <td>
+                            Goat
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Leo
+                        </td>
+                        <td>
+                            7/23-8/22
+                        </td>
+                        <td>
+                            Fire
+                        </td>
+                        <td>
+                            Fixed
+                        </td>
+                        <td>
+                            Monkey
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Virgo
+                        </td>
+                        <td>
+                            8/23-9/22
+                        </td>
+                        <td>
+                            Earth
+                        </td>
+                        <td>
+                            Mutable
+                        </td>
+                        <td>
+                            Rooster
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Libra
+                        </td>
+                        <td>
+                            9/23-10/22
+                        </td>
+                        <td>
+                            Air
+                        </td>
+                        <td>
+                            Cardinal
+                        </td>
+                        <td>
+                            Dog
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Scorpio
+                        </td>
+                        <td>
+                            10/23-11/21
+                        </td>
+                        <td>
+                            Water
+                        </td>
+                        <td>
+                            Fixed
+                        </td>
+                        <td>
+                            Pig
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Sagittarius
+                        </td>
+                        <td>
+                            11/22-12/21
+                        </td>
+                        <td>
+                            Fire
+                        </td>
+                        <td>
+                            Mutable
+                        </td>
+                        <td>
+                            Rat
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Capricorn
+                        </td>
+                        <td>
+                            12/22-1/19
+                        </td>
+                        <td>
+                            Earth
+                        </td>
+                        <td>
+                            Cardinal
+                        </td>
+                        <td>
+                            Ox
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Aquarius
+                        </td>
+                        <td>
+                            1/20-2/19
+                        </td>
+                        <td>
+                            Air
+                        </td>
+                        <td>
+                            Fixed
+                        </td>
+                        <td>
+                            Tiger
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Pisces
+                        </td>
+                        <td>
+                            2/20-3/20
+                        </td>
+                        <td>
+                            Water
+                        </td>
+                        <td>
+                            Mutable
+                        </td>
+                        <td>
+                            Rabbit
+                        </td>
+                    </tr>
+                </table>
+            </section>
+            <section id='western'>
+                <article>Western Astrology</article>
+                <dl>
+                    <dt>Aries</dt>
+                    <dd>           Aries is energetic, straight forward, and brave. They are good at initializing activities 
+                        with an intensity, and any mistakes they make with poor planning can easily be made up with yet more 
+                        dynamism.</dd>
+                    <dt>Taurus</dt>
+                    <dd>            Taureans are reliable, stubborn, and connoisseur's of pleasure from all senses. 
+                        Capabale of storing much energy, they are ready to endure patiently until prospects reach fruition. </dd>
+                    <dt>Gemini</dt>
+                    <dd>            Gemini is the definitive human sign, representing all aspects of the human condition most accurately. 
+                        Endowed with the ability of expression and lightning fast wit, this jack of all trades mercurial tendencies 
+                        can excel in a variety of departments. </dd>
+                    <dt>Cancer</dt>
+                    <dd>            Cancer is an intuitive and creative sign that values security in home, finances, and emotions. They can 
+                        seem crusty on the outside, until you gain the trust of this intelligent and funny leader. </dd>
+                    <dt>Leo</dt>
+                    <dd>            Leo is a sign of pride, ego and self-expression. Creative, likeable, and generous, this dominant individual 
+                        harness' the power of the sun to illuminate their surroundings. </dd>
+                    <dt>Virgo</dt>
+                    <dd>            Virgos are intelligent, detail oriented and methodical. Their realistic view on reality can lead to 
+                        pessimism, due to the inevitability of their perfectionism going unsatisfied.</dd>
+                    <dt>Libra</dt>
+                    <dd>            Libras are a sign of harmony, social grace, and partnership. Ruled by Venus, they are naturally artistic, and 
+                        as an air sign they are communicative. They like to be the best, and impress people with their 
+                        outlandish antics. Being that Libra's are the newest sign, they can also be frivolous, deceptive, 
+                        duplicitious, and sadistic. </dd>
+                    <dt>Scorpio</dt>
+                    <dd>            Scorpios are a sign of intensity, passion, and emotions. They get deeply involved in love and relationships, 
+                        and are prone to revenge if irrevocably slighted. Like a scorpion in your shoe, they can exist under the 
+                        radar until the opportune moment when you will no longer ignore their presence and power. </dd>
+                    <dt>Sagittarius</dt>
+                    <dd>            Sagittarians are somewhat of a jovial clownish philosopher. They have an open-minded and no strings 
+                        attached philosophy, seeking to understand and travel the world. Being the archer, they are straight 
+                        shooters, and can suffer from foot in mouth syndrome with their blunt language. </dd>
+                    <dt>Capricorn</dt>
+                    <dd>            Capricorn implies you are a hardworking individual that epitomizes the zenith of  
+                        aspiration. The leader of signs, well rounded and ambitious, shows much prowess in all endeavors. </dd>
+                    <dt>Aquarius</dt>
+                    <dd>                Aquarians are natural innovators, and not only do they walk to the beat of a different drummer, they 
+                        probably crafted the drum itself. Humanitarian, intellectual, and communicative, they have great 
+                        ability to connect with people. </dd>
+                    <dt>Pisces</dt>
+                    <dd>                Pisces are comprised of all the the qualities of the zodiac. Mystical, inuitive, psychic, creative, 
+                        Pisces see's into the spritual realm. The two fish swimming in opposite directions represent the 
+                        humans power of choice, the master of one's own fate, for better or worse. </dd>
+                </dl>
+            </section>
+            <section id='chinese'>
+                <article>Chinese Astrology</article>
+                <dl>
+                    <dt>Rat</dt>
+                    <dd>The rat is intelligent, sociable, and energetic.</dd>
+                    <dt>Ox</dt>
+                    <dd>Oxes are known for being hardworking, strong, dependable, and honest. </dd>
+                    <dt>Tiger</dt>
+                    <dd>Tigers are known as brave, competitive, and thrill seeking. </dd>
+                    <dt>Rabbit</dt>
+                    <dd>Rabbits are known as intelligent, elegant, sensitive, and appreciative of the finer things in life. </dd>
+                    <dt>Dragon</dt>
+                    <dd>Dragons are powerful, assertive, enthusiastic, egotistical, and doesn't take criticism well. </dd>
+                    <dt>Snake</dt>
+                    <dd>Snakes are wise, good at speaking, suceeding in life, and overly sexual.</dd>
+                    <dt>Horse</dt>
+                    <dd>Horse's are energetic, very apt with skills, hardworking, sociable, and like to perform. </dd>
+                    <dt>Goat</dt>
+                    <dd>Goats are naturally artistic, creative, stylish, and reserved. While they don't like to be the center of 
+                        attention, they like to be recognized for their unique skills. </dd>
+                    <dt>Monkey</dt>
+                    <dd>Monkey's are witty, intelligent, curious and versatile. They like practical jokes and breaking the rules, and not 
+                        everyone responds to their relentless ruse.</dd>
+                    <dt>Rooster</dt>
+                    <dd>Roosters are active, sociable, honest, and artistic. They like being attractive, loyal, and expressing their opinions. </dd>
+                    <dt>Dog</dt>
+                    <dd>        
+                        Dogs are loyal, nice, sociable, somewhat cautious and anxious. They like to perform for others, 
+                        and are well liked by peers. </dd>
+                    <dt>Pig</dt>
+                    <dd>        Pigs are hardworking, generous, and nice. They concentrate on their tasks well, and thrive at their 
+                        ambitions. Though bubbly and humorous on the outside, they have a dark side as well. </dd>
+                  </dl>
+            </section>
+            <section id='chineseElements'>
+                <article>Chinese Astrology Elements</article>
+                <dl>
+                    <dt>Fire</dt>
+                    <dd> Fire is energetic, aggressive and relentless. </dd>
+                    <dt>Earth</dt>
+                    <dd>Earth is stabalizing, calm, diplomatic, and has a natural grasp of worldly endeavours.</dd>
+                    <dt>Metal</dt>
+                    <dd>Metal is tough, determined, and creative.</dd>
+                    <dt>Water</dt>
+                    <dd> Water is creative, wise, calm, intuitive and reflective.</dd>
+                    <dt>Wood</dt>
+                    <dd> Wood is hardworking, benevolent, and cares for others. It is naturally patient and sensitive.</dd>
+                </dl>
+            </section>
+        </main>
+    </body>
+    <script>
+
+    </script>
+</html>

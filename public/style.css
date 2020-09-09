@@ -1,0 +1,109 @@
+body, html {
+    margin:0;
+    font-family:sans-serif;
+} main {
+    height:100vh;
+    display:grid;
+    grid:"space0 space1 space1 space1 space1"
+         "space0 space1 space1 space1 space1"
+         "space0 space2 space2 space2 space2"
+         "space0 space2 space2 space2 space2"
+         "space0 space2 space2 space2 space2"
+         "space0 space2 space2 space2 space2"
+         "space0 space2 space2 space2 space2"
+         "space0 space2 space2 space2 space2"
+         "space0 space2 space2 space2 space2"
+         "space0 space2 space2 space2 space2"
+         "space0 space2 space2 space2 space2";
+         background:#0fff9f;
+} #rithmForm {
+    background:#0fff9f;
+    width:fit-content;
+} input {
+    width:5em;
+} #algorithm {
+    display:grid;
+    grid-template-columns:auto auto auto;
+    overflow:scroll;
+    background:#0fff9f;
+    height:83vh;
+} .fractionRatio, .decimalRatio, .frequencyRatio {
+    border:solid 1px #2c00f2;
+    text-align:center;
+}
+
+#box0 {
+    grid-area:space0;
+    background:#0fff9f;
+    position:absolute;
+} #box1 {
+    grid-area:space1;
+    background:#2c00f2;
+    position:relative;
+    width:93%;
+    left:7%;
+} #box2 {
+    grid-area:space2;
+    background:#ff005d;
+    display:flex;
+    justify-content:space-evenly;
+    align-items:center;
+
+} #localDatabaseForm {
+    width:fit-content;
+    margin:auto;
+    padding:1%;
+    border:solid 1px black;
+} #localDatabaseArea {
+    border:solid 2px black;
+    background:white;
+    width:fit-content;
+    width:12em;
+    position:relative;
+} #localRetrieve {
+    background:white;
+    height:9em;
+    overflow:scroll;
+} #localDataRetrieved {
+    background:white;
+    border:solid black 1px;
+} #retrievedScale {
+    overflow:scroll;
+    cursor:pointer;
+}
+
+.scaleNameRetrieved {
+    border:solid 1px black;
+    cursor:pointer;
+} #metaScaleName {
+    text-align:center;
+    border:solid 1px black;
+    background:black;
+    color:white;
+}
+h1 {
+    text-align:center;
+    font-family: 'Dancing Script', cursive;
+    color:white;
+}
+#tileBox {
+    display:grid;
+    grid-template-columns:auto auto auto auto auto auto auto auto auto auto;
+} .tileBags {
+    background:#2c00f2;
+    border:#2c00f2 1px solid;
+}
+.keymaps, .decimals, .fractions, .frequencies {
+    font-family:sans-serif;
+    background:#ff005d;
+    border-bottom:#2c00f2 solid 1px;
+    text-align:center;
+    color:white;
+} .fractionRatio {
+    cursor:pointer;
+}
+
+#basicControls, #theBiquadFilter, #compressor {
+    background:white;
+    border:solid 2px black;
+}

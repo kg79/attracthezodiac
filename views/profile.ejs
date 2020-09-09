@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            :root {
+                --goldilox:#e0d313;
+                --cap-blue:#00aeff;
+            } body {
+                margin:0;
+                background:var(--cap-blue);
+                font-family:sans-serif;
+            } h1 {
+                font-family:sans-serif;
+                text-align:center;
+                background:var(--cap-blue);
+                margin:0;
+                color:var(--goldilox);
+            } nav { 
+                display:flex;
+                justify-content:space-around;
+                background:var(--goldilox);
+                margin:0;
+                height:5vh;
+                align-items:center;
+            } a {
+                color:var(--cap-blue);
+                font-family:sans-serif;
+            } main {
+                
+            } article {
+                margin:auto;
+                width:fit-content;
+                padding:1%;
+            } .borderArticles {
+                border:solid 2px var(--goldilox);
+            }
+            
+            
+            @media (orientation: landscape) {
+                 #top {
+                    display:flex;
+                    width:70vw;
+                    margin:auto;
+                    margin-top:1vh;
+                }
+            } #bottom {
+                text-align:center;
+                display:flex;
+                width:70vw;
+                margin:auto;
+                margin-top:1vh;
+            } table {
+                margin-top:3vh;
+                border-collapse:collapse;
+                margin:auto;
+            } td, th {
+                border:solid 2px var(--goldilox);
+            }
+        </style>
+    </head>
+    <body>
+        <h1><%= data[0].username %></h1>
+        <nav>
+            <a href='/info'>info</a>
+            <a href='/search'>search</a>
+            <a href='/editProfile'>edit profile</a>
+            <a href='/messages'>messages</a>
+        </nav>
+        <main>
+            <section id='top'>
+                <article class='borderArticles'>
+                    <img src="data:image/jpeg;base64, <%= data[0].pictureData %>" height='200'/>
+                </article>
+                <article class='borderArticles'>
+                    <%= data[0].bio %>
+                </article>
+            </section>
+            <section id='bottom'>
+                <article>
+                Questions
+                <table cellpadding='5'>
+                    <tr>
+                        <td>
+                            likes
+                        </td>
+                        <td>
+                            <%= data[0].likes %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            dislikes
+                        </td>
+                        <td>
+                            <%= data[0].dislikes %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            loves
+                        </td>
+                        <td>
+                            <%= data[0].loves %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            hates
+                        </td>
+                        <td>
+                            <%= data[0].hates %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            guilty pleasures
+                        </td>
+                        <td>
+                            <%= data[0].guiltyPleasures %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            music
+                        </td>
+                        <td>
+                            <%= data[0].music %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            fun
+                        </td>
+                        <td>
+                            <%= data[0].fun %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            work
+                        </td>
+                        <td>
+                            <%= data[0].work %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            movies
+                        </td>
+                        <td>
+                            <%= data[0].movies %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            sex
+                        </td>
+                        <td>
+                            <%= data[0].sex %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            drugs alcohol
+                        </td>
+                        <td>
+                            <%= data[0].drugsAlcohol %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            tobacco
+                        </td>
+                        <td>
+                            <%= data[0].tobacco %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            food
+                        </td>
+                        <td>
+                            <%= data[0].food %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            respects
+                        </td>
+                        <td>
+                            <%= data[0].respects %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            comedy
+                        </td>
+                        <td>
+                            <%= data[0].comedy %>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            art
+                        </td>
+                        <td>
+                            <%= data[0].art %>
+                        </td>
+                    </tr>
+                </table>
+            </article>
+            <article class='borderArticles'>
+                Send Message
+                <form action='/message' method='POST'>
+                    <textarea name='message'></textarea><br/>
+                    <input type='submit'>
+                </form>
+            </article>
+            </section>
+        </main>
+    </body>
+    <script>
+
+    </script>
+</html>

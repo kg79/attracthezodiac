@@ -1,0 +1,10 @@
+1. first order of business is to address the chinese new year situation. complete
+2. make a landing page. navigation. pending completion
+3. determine tropical sign and element complete
+4. implicate and interpret signs on landing page
+
+<!-- <img src="data:image/png;base64, <%= stringy %>"/> -->
+
+    <!-- <%= stringy %> -->
+    <!-- <img src="data:image/jpeg;base64, <%= stringy %>"/> -->
+    <!-- <img src="data:image/jpeg;base64,<%= stringy %>" alt="Red dot" /> -->

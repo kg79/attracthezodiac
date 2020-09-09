@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            :root {
+                --goldilox:#e0d313;
+                --cap-blue:#00aeff;
+            } body {
+                margin:0;
+                background:var(--cap-blue);
+                font-family:sans-serif;
+            } h1 {
+                font-family:sans-serif;
+                text-align:center;
+                background:var(--cap-blue);
+                margin:0;
+                color:var(--goldilox);
+            } nav { 
+                display:flex;
+                justify-content:space-around;
+                background:var(--goldilox);
+                margin:0;
+                height:5vh;
+                align-items:center;
+            } a {
+                color:var(--cap-blue);
+                font-family:sans-serif;
+	    } table {
+		    border-collapse:collapse;
+			margin:auto;
+			margin-top:3vh;
+	    } td {
+		    border:solid 1px black;
+	    }
+	</style>
+
+    </head>
+    <body>
+	    <h1>Messages from</h1>
+        <nav>
+            <a href='/info'>info</a>
+            <a href='/search'>search</a>
+            <a href='/editProfile'>edit profile</a>
+            <a href='/messages'>messages</a>
+        </nav>
+	<table cellpadding='5'>
+	<% for (let i = 0; i < data.length; i++) { %>
+	<tr>
+		<td>
+			<%= data[i].sender %>
+		</td>
+		<td>
+			<%= data[i].message %>
+		</td>
+	<% } %>
+	</table>
+    </body>
+    <script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</html>
